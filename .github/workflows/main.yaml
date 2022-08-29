@@ -13,3 +13,14 @@ jobs:
         run: |
           node -v
           npm -v
+      - name: python Commands
+        run: |
+          import platform
+          print(platform.processor)
+        shell: python
+      - name: run node Commands
+        run: |
+          const a = 1;
+          const b = 2;
+          console.log(a + b);
+        shell: node
