@@ -6,6 +6,10 @@ jobs:
   run-action:
     runs-on: ubuntu-latest
     steps:
+      - name: List folders
+        run: |
+          pwd
+          ls
       - name: step-1
         id: greetingStep
         uses: actions/hello-world-javascript-action@v1
