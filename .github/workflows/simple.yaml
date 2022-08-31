@@ -1,6 +1,13 @@
 name: Simple Action
 
-on: push
+on:
+  push:
+  pull_request:
+    types:
+      - closed
+      - assigned
+      - opened
+      - reopened
 
 jobs:
   run-action:
