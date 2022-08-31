@@ -3,7 +3,7 @@ name: Simple Action
 on:
   pull_request:
   schedule:
-    - cron: "5 * * * *"
+    - cron: "0/5 * * * *"
 
 jobs:
   run-action:
