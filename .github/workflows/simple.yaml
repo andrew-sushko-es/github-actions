@@ -1,13 +1,9 @@
 name: Simple Action
 
 on:
-  push:
   pull_request:
-    types:
-      - closed
-      - assigned
-      - opened
-      - reopened
+  schedule:
+    - cron: "5 * * * *"
 
 jobs:
   run-action:
