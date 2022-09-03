@@ -1,0 +1,17 @@
+name: File creation and push
+
+on:
+  - push
+
+jobs:
+  create-file-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Create File with random number
+        run: |
+          pwd
+          ls -a
+          git clone git@github.com:${{github.repository}}.git
+          ls -a
