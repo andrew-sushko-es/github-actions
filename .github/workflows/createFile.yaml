@@ -13,5 +13,16 @@ jobs:
         run: |
           pwd
           ls -a
-          git clone https://github.com/${{github.repository}}.git
+          git init
+          git remote add origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}".git
+          git config --global user.email "testEmail@test.com"
+          git config --global user.name "testName"
+          git fetch
+          git checkout master
+          git branch --set-upstream-to=origin/master
+          git pull
           ls -a
+          echo $RANDOM >> random.txt
+          git add -a
+          git commit -m "create a new file"
+          git push
