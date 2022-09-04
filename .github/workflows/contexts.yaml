@@ -10,10 +10,10 @@ jobs:
     steps:
       - name: Echo functions outputs
         run: |
-          echo ${{ contains("hello", "ll") }}
+          echo ${{ contains('hello', 'll') }}
   console-context:
     runs-on: ubuntu-latest
-    if: github.event_name == "push"
+    if: github.event_name == 'push'
     steps:
       - name: Github context
         env:
