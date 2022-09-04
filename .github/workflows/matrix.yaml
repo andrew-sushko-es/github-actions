@@ -9,6 +9,20 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
         node-version: [6, 8, 10]
+        
+        include:
+          - os: mubuntu-latest
+            node-version: 6
+            is-ubuntu: "Yes it is ubuntu"
+
+        exclude:
+          - os: macos-latest
+            node-version: 8
+          - os: windows-latest
+            node-version: 6
+          - os: ubuntu-latest
+            node-version: 10
+
     runs-on:  ${{ matrix.os }}
     steps:
       - name: Log version
@@ -18,4 +32,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Log version
-        run: node -v
+        run: |
+          node -v
+          echo ${{ matrix.is-ubuntu }}
