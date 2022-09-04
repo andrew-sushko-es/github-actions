@@ -20,7 +20,7 @@ jobs:
       - name: Send message to slack
         uses: docker://technosophos/slack-notify
         env:
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_MESSAGE: Test message from commit ${{ github.sha }}
 
           
