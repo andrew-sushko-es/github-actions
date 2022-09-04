@@ -1,0 +1,19 @@
+name: Draw contexts
+
+on:
+  - push
+
+jobs:
+  console-context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Github context
+        env:
+          CONTEXT: ${{ toJson($GITHUB) }}
+        run: |
+          echo $CONTEXT
+      - name: Secrets context
+        env:
+          CONTEXT: ${{ toJson($GITHUB) }}
+        run: |
+          echo $CONTEXT
