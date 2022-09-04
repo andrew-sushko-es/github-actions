@@ -21,7 +21,7 @@ jobs:
         run: |
           echo $CONTEXT
       - name: Secrets context
-        if: failure() || success()
+        if: always()
         env:
           CONTEXT: ${{ toJson(secrets) }}
         run: |
