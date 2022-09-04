@@ -19,7 +19,7 @@ jobs:
         env:
           CONTEXT: ${{ toJson(github) }}
         run: |
-          echo $CONTEXT
+          eccho $CONTEXT
       - name: Secrets context
         if: failure()
         env:
