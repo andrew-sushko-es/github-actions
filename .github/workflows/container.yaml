@@ -18,10 +18,10 @@ jobs:
     steps:
       - name: POST a user
         run: |
-          "curl --request POST \
+          curl --request POST \
           --url http://localhost:3001/api/user \
           --header 'Content-Type: aplication/json' \
-          --data '{\"username\": \"hefsllo\", \"address\": \"dwgsded\"}'"
+          --data '{\"username\": \"hefsllo\", \"address\": \"dwgsded\"}'
       - name: GET a users
         run: |
           curl --request GET \
