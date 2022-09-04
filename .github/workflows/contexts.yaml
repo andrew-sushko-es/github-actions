@@ -9,11 +9,11 @@ jobs:
     steps:
       - name: Github context
         env:
-          CONTEXT: ${{ toJson($GITHUB) }}
+          CONTEXT: ${{ toJson(github) }}
         run: |
           echo $CONTEXT
       - name: Secrets context
         env:
-          CONTEXT: ${{ toJson($GITHUB) }}
+          CONTEXT: ${{ toJson(secrets) }}
         run: |
           echo $CONTEXT
