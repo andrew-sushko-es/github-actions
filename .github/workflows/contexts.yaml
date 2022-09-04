@@ -2,10 +2,18 @@ name: Draw contexts
 
 on:
   - push
+  - pull_request
 
 jobs:
+  functions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo functions outputs
+        run: |
+          echo ${{ contains("hello", "ll") }}
   console-context:
     runs-on: ubuntu-latest
+    if: github.event_name == "push"
     steps:
       - name: Github context
         env:
