@@ -11,7 +11,7 @@ jobs:
         node-version: [6, 8, 10]
         
         include:
-          - os: mubuntu-latest
+          - os: ubuntu-latest
             node-version: 6
             is-ubuntu: "Yes it is ubuntu"
 
