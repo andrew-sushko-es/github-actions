@@ -6,18 +6,15 @@ on:
 jobs:
   run_in_docker_container:
     runs-on: ubuntu-latest
-    services:
-      app:
-        image: alialaa17/node-api
-        ports:
-          - 3001:3000
-      mongo:
-        image: mongo
-        ports:
-          - "27017:27017"
     steps:
-      - name: POST a user
-        run: "curl -X POST http://localhost:3001/api/user -H 'Content-Type: aplication/json' -d {\"username\": \"hefsllo\", \"address\": \"dwgsded\"}"
-      - name: GET a users
-        run: curl http://localhost:3001/api/users
+      - name: Echo
+        uses: docker://node:12.14.1-alpine3.10
+        with:
+          entrypoint: "/bin/echo"
+          args: "Hello World"
+      - name: Node version
+        uses: docker://node:12.14.1-alpine3.10
+        with:
+          entrypoint: "/usr/local/bin/node"
+          args: '-v'
           
