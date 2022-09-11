@@ -1,7 +1,13 @@
 name: Deploy App
 
 on:
-  - push
+  push:
+    branches:
+      - development
+  pull_request:
+      branches:
+        - development
+    
 
 jobs:
   build_and_test:
