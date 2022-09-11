@@ -61,7 +61,7 @@ jobs:
           path: build
       
       - name: Download Artifacts
-        uses: actions/download-artifact
+        uses: actions/download-artifact@v3
 
       - name: Deploy on Staging
         if: github.event_name == 'push'
