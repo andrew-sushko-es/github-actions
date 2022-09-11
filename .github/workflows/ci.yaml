@@ -1,9 +1,6 @@
-name: Deploy App
+name: CI
 
 on:
-  push:
-    branches:
-      - development
   pull_request:
     branches:
       - development
@@ -14,11 +11,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Run Format check
         run: npm run format:check
       - name: Run Tests
-        run: npm test
-      - name: Build
-        run: npm run build
+        run: npm test -- --coverage
+        env:
+          CI: true
