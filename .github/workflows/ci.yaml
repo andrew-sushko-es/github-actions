@@ -44,9 +44,24 @@ jobs:
         env:
           CI: true
 
+      - name: Upload Test Coverage Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-artifact
+          path: coverage
+
       - name: Build Project
         if: github.event_name == 'push'
         run: npm run build
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: build
+      
+      - name: Download Artifacts
+        uses: actions/download-artifact
 
       - name: Deploy on Staging
         if: github.event_name == 'push'
