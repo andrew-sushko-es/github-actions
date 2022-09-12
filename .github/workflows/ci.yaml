@@ -22,7 +22,6 @@ jobs:
         id: cache-path
         run: |
           echo "::set-output name=dir::$(npm config get cache)"
-          echo $IS_PUSH
 
       - name: Cache node_modules
         uses: actions/cache@v3
@@ -55,11 +54,11 @@ jobs:
           path: coverage
 
       - name: Build Project
-        if: env.IS_PUSH
+        if: toJSON(env.IS_PUSH)
         run: npm run build
 
       - name: Upload Build Artifacts
-        if: env.IS_PUSH
+        if: toJSON(env.IS_PUSH)
         uses: actions/upload-artifact@v3
         with:
           name: build-artifact
@@ -69,7 +68,7 @@ jobs:
         uses: actions/download-artifact@v3
 
       - name: Deploy on Staging
-        if: env.IS_PUSH
+        if: toJSON(env.IS_PUSH)
         run: npx surge --project ./build --domain actions-staging.surge.sh
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
