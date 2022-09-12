@@ -14,21 +14,56 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Get Cahce path
+        id: cache-path
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.cache-path.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: latest
+
       - name: Install dependencies
         run: npm ci
+
       - name: Run Format check
         run: npm run format:check
+
       - name: Run Tests
         run: npm test -- --coverage
         env:
           CI: true
+
+      - name: Upload Test Coverage Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-artifact
+          path: coverage
+
       - name: Build Project
         if: github.event_name == 'push'
         run: npm run build
+
+      - name: Upload Build Artifacts
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: build
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+
       - name: Deploy on Staging
         if: github.event_name == 'push'
         run: npx surge --project ./build --domain actions-staging.surge.sh
